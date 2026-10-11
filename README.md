@@ -1,8 +1,8 @@
-# N4Agar
+# Agar-ancienne
 
 Clone d'agar.io taillé pour une LAN party : parties chronométrées lancées par un admin, classement complet de tous les joueurs, snapshots réguliers fusionnés en score final, logs et exports de fin de partie, manette, touche « se refondre ». Hors ligne, un seul conteneur Docker, aucune dépendance Internet à l'exécution.
 
-Dérivé de [owenashurst/agar.io-clone](https://github.com/owenashurst/agar.io-clone) (MIT). La conception vit dans le vault Obsidian `vault/` (point d'entrée `vault/N4Agar.md`).
+Dérivé de [owenashurst/agar.io-clone](https://github.com/owenashurst/agar.io-clone) (MIT). La conception vit dans le vault Obsidian `vault/` (point d'entrée `vault/Agar-ancienne.md`).
 
 ## Trois pages
 
@@ -97,7 +97,7 @@ Chaque partie terminée produit dans `parties/<id>/` :
 | `n4lan.csv` | `pseudo;points;motif`, importable tel quel dans N4Lan |
 | `partie.json` | Tout ce qui précède, brut |
 
-L'historique est aussi en SQLite (`data/n4agar.sqlite`) et téléchargeable depuis la console.
+L'historique est aussi en SQLite (`data/agar-ancienne.sqlite`) et téléchargeable depuis la console.
 
 ## Outils
 

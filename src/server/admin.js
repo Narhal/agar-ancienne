@@ -9,7 +9,7 @@ import { randomBytes, timingSafeEqual } from 'node:crypto';
 import { EXPORT_FILES } from './logs.js';
 
 const SESSION_MS = 12 * 3600 * 1000;
-const COOKIE = 'n4agar_admin';
+const COOKIE = 'agar-ancienne_admin';
 
 function parseCookies(header) {
     const out = {};

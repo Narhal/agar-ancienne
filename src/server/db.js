@@ -7,7 +7,7 @@ import { join } from 'node:path';
 
 export function openDatabase(dataDir) {
     mkdirSync(dataDir, { recursive: true });
-    const db = new DatabaseSync(join(dataDir, 'n4agar.sqlite'));
+    const db = new DatabaseSync(join(dataDir, 'agar-ancienne.sqlite'));
     db.exec(`
         PRAGMA journal_mode = WAL;
         CREATE TABLE IF NOT EXISTS games (

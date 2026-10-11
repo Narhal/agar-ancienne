@@ -10,7 +10,7 @@ Un agar.io qui tient une **soirée de LAN** : on lance une partie de 15 minutes,
 - jQuery depuis Internet : injouable hors ligne.
 - Pas de manette, pas de touches configurables, pas de moyen de se refondre après un split.
 
-## Ce que N4Agar vise
+## Ce que Agar-ancienne vise
 
 - **Lisible pour la salle** : chrono au centre, classement complet sur l'écran commun, vainqueur affiché en grand.
 - **Juste** : les snapshots récompensent la régularité, pas le dernier blob ; les kills comptent ; le rappel réduit la part de hasard du split.

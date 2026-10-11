@@ -2,7 +2,7 @@
 
 ## Touches
 
-Quatre actions reconfigurables dans Réglages, comparées sur `event.code` (indépendant de la disposition azerty/qwerty) et sauvegardées dans `localStorage` (`n4agar.keys`) :
+Quatre actions reconfigurables dans Réglages, comparées sur `event.code` (indépendant de la disposition azerty/qwerty) et sauvegardées dans `localStorage` (`agar-ancienne.keys`) :
 
 | Action | Défaut |
 |---|---|

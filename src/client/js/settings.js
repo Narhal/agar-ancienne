@@ -1,9 +1,9 @@
 // Réglages persistants (localStorage) : touches et options d'affichage.
 
-const KEYS_STORAGE = 'n4agar.keys';
-const OPTIONS_STORAGE = 'n4agar.options';
-const NAME_STORAGE = 'n4agar.name';
-const TOKEN_STORAGE = 'n4agar.token';
+const KEYS_STORAGE = 'agar-ancienne.keys';
+const OPTIONS_STORAGE = 'agar-ancienne.options';
+const NAME_STORAGE = 'agar-ancienne.name';
+const TOKEN_STORAGE = 'agar-ancienne.token';
 
 export const DEFAULT_KEYS = {
     split: 'Space',

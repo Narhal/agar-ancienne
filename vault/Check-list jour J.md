@@ -21,5 +21,5 @@
 
 ## Après
 
-- Importer `n4lan.csv` de chaque partie dans N4Lan (points, motif « N4Agar partie <id> »).
-- Sauvegarder `parties/` et le volume `n4agar-data` (`docker compose cp n4agar:/data ./sauvegarde-data`).
+- Importer `n4lan.csv` de chaque partie dans N4Lan (points, motif « Agar-ancienne partie <id> »).
+- Sauvegarder `parties/` et le volume `agar-ancienne-data` (`docker compose cp agar-ancienne:/data ./sauvegarde-data`).

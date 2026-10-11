@@ -1,4 +1,4 @@
-// N4Agar — serveur de jeu. Dérivé de owenashurst/agar.io-clone (MIT).
+// Agar-ancienne — serveur de jeu. Dérivé de owenashurst/agar.io-clone (MIT).
 //
 // Le serveur fait foi sur tout : positions, masses, fusions, temps, score.
 // Le client ne fait que rendre et envoyer sa cible et ses actions.
@@ -550,9 +550,9 @@ function lanAddresses() {
 }
 
 http.listen(config.port, config.host, () => {
-    console.log(`[N4AGAR] Serveur prêt sur le port ${config.port}`);
-    for (const addr of lanAddresses()) console.log(`[N4AGAR]   jeu : http://${addr}:${config.port}/   classement : /classement   admin : /admin`);
-    if (config.adminPass === 'changez-moi') console.warn('[N4AGAR] ADMIN_PASS est à sa valeur par défaut : changez-le dans .env ou docker-compose.yml');
+    console.log(`[AGAR-ANCIENNE] Serveur prêt sur le port ${config.port}`);
+    for (const addr of lanAddresses()) console.log(`[AGAR-ANCIENNE]   jeu : http://${addr}:${config.port}/   classement : /classement   admin : /admin`);
+    if (config.adminPass === 'changez-moi') console.warn('[AGAR-ANCIENNE] ADMIN_PASS est à sa valeur par défaut : changez-le dans .env ou docker-compose.yml');
 });
 
 process.on('SIGTERM', () => { db.close(); process.exit(0); });

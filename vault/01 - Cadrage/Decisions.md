@@ -4,7 +4,7 @@ Décisions prises le 2026-10-11 avec Lionel (réponses aux [[Questions ouvertes]
 
 | # | Sujet | Décision | Raison |
 |---|---|---|---|
-| D1 | Origine | Fork de owenashurst/agar.io-clone dans un **nouveau dépôt** `Narhal/n4agar`, pas un fork GitHub | Liberté sur le README et la structure (Q17) ; l'amont est inactif |
+| D1 | Origine | Fork de owenashurst/agar.io-clone dans un **nouveau dépôt** `Narhal/agar-ancienne`, pas un fork GitHub | Liberté sur le README et la structure (Q17) ; l'amont est inactif |
 | D2 | Hébergement | **Docker sur le serveur LAN uniquement**, pas de github.io | Le jeu a besoin d'un serveur Node + WebSocket ; GitHub Pages ne sert que du statique |
 | D3 | Stack | Node ESM ≥ 22, Express 4, socket.io 4, `sat`. **SQLite via `node:sqlite`**, pas de module natif. **Pas de bundler** : le client est servi en modules ES natifs | Un `npm ci` sans compilation, une image Alpine légère, rien à builder la veille ; gulp 4 et sqlite3 natif étaient les deux points fragiles de l'amont |
 | D4 | Langue | Code et commentaires en **anglais** (continuité avec l'amont), interface, messages, vault et exports en **français** | Q18 |

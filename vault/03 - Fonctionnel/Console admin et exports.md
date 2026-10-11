@@ -24,7 +24,7 @@ Dossier `parties/<id>/` (volume Docker `./parties`), id = `AAAAMMJJ-HHMM-xxxx`.
 | `classement.csv` | rang, pseudo, score, score_snapshots, masse_finale, kills, morts, masse_max, temps_en_vie, temps_connecte |
 | `snapshots.csv` | snapshot, temps_de_jeu, horodatage, rang, pseudo, masse |
 | `kills.csv` | temps_de_jeu, horodatage, mangeur, mange, masse_absorbee |
-| `n4lan.csv` | pseudo, points, motif (`N4Agar partie <id>`) |
+| `n4lan.csv` | pseudo, points, motif (`Agar-ancienne partie <id>`) |
 | `partie.json` | id, dates, durée, réglages, classement, snapshots, kills |
 
 Dialecte CSV de N4Lan : point-virgule, BOM UTF-8, CRLF, cellules commençant par `=`/`+`/`-`/`@` protégées. `n4lan.csv` s'importe tel quel dans Configuration → Import de points de N4Lan (les pseudos doivent exister côté N4Lan ; les inconnus sont listés par l'aperçu d'import).
@@ -33,4 +33,4 @@ Les mêmes fichiers se téléchargent depuis la console (`/api/admin/games/<id>/
 
 ## Base SQLite
 
-`data/n4agar.sqlite` (volume `n4agar-data`) : `games` (résultat JSON complet), `chat_messages` (avec IP et id de partie), `failed_logins`.
+`data/agar-ancienne.sqlite` (volume `agar-ancienne-data`) : `games` (résultat JSON complet), `chat_messages` (avec IP et id de partie), `failed_logins`.

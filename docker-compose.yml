@@ -1,7 +1,7 @@
 services:
-  n4agar:
+  agar-ancienne:
     build: .
-    container_name: n4agar
+    container_name: agar-ancienne
     restart: unless-stopped
     ports:
       - "3002:3000"
@@ -25,7 +25,7 @@ services:
       # Exports de fin de partie (JSON + CSV), lisibles depuis l'hôte.
       - ./parties:/parties
       # Base SQLite (historique des parties, chat, tentatives admin).
-      - n4agar-data:/data
+      - agar-ancienne-data:/data
 
 volumes:
-  n4agar-data:
+  agar-ancienne-data:

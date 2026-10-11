@@ -1,4 +1,4 @@
-# N4Agar — agar.io pour la LAN
+# Agar-ancienne — agar.io pour la LAN
 
 Fork de [owenashurst/agar.io-clone](https://github.com/owenashurst/agar.io-clone) (MIT) pour le week-end de LAN (~70 joueurs, hors ligne, Docker sur le serveur Windows). Projet voisin de N4Lan et N4Quiz (`../n4lan`, `../n4quiz`). Démarré le 2026-10-11.
 

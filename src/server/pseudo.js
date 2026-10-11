@@ -14,7 +14,7 @@ export function normaliser(pseudo) {
 }
 
 const AUTORISE = /^[\p{L}\p{N} ._'-]+$/u;
-const INTERDITS = ['admin', 'administrateur', 'serveur', 'systeme', 'n4agar', 'null', 'undefined', 'spectateur'];
+const INTERDITS = ['admin', 'administrateur', 'serveur', 'systeme', 'agar-ancienne', 'null', 'undefined', 'spectateur'];
 
 /** @returns {{ ok: true, pseudo: string, normalise: string } | { ok: false, motif: string }} */
 export function validerPseudo(brut) {

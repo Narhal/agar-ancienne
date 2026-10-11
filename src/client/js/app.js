@@ -1,4 +1,4 @@
-// N4Agar — client. Dérivé de owenashurst/agar.io-clone (MIT).
+// Agar-ancienne — client. Dérivé de owenashurst/agar.io-clone (MIT).
 
 import global from './global.js';
 import * as render from './render.js';

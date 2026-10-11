@@ -45,7 +45,7 @@ test('classement.csv : en-têtes, lignes, durées et neutralisation des formules
 test('n4lan.csv : format pseudo;points;motif attendu par l’import N4Lan', () => {
     const rows = analyserCsv(n4lanCsv(result));
     assert.deepEqual(rows[0], ['pseudo', 'points', 'motif']);
-    assert.deepEqual(rows[1], ['Alice', '300', 'N4Agar partie 20261011-2200-ab12']);
+    assert.deepEqual(rows[1], ['Alice', '300', 'Agar-ancienne partie 20261011-2200-ab12']);
 });
 
 test('snapshots.csv et kills.csv : une ligne par entrée', () => {

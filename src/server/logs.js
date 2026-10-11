@@ -40,7 +40,7 @@ export function killsCsv(result) {
 
 // Format attendu par l'import de points de N4Lan.
 export function n4lanCsv(result) {
-    const motif = `N4Agar partie ${result.id}`;
+    const motif = `Agar-ancienne partie ${result.id}`;
     return versCsv(['pseudo', 'points', 'motif'], result.ranking.map((r) => [r.name, r.score, motif]));
 }
 

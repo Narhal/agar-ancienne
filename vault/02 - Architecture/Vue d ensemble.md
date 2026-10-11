@@ -38,8 +38,8 @@ Ce qui part vers les clients passe par `GameMap.projectPlayer` : ni IP ni jeton 
 
 ## API admin
 
-`POST /api/admin/login|logout`, `GET state`, `POST start|stop|pause|resume|snapshot|settings|kick|message`, `GET games`, `GET games/:id`, `GET games/:id/<fichier>`, `GET failed-logins`. Cookie `n4agar_admin`, `httpOnly`, `SameSite=Strict`.
+`POST /api/admin/login|logout`, `GET state`, `POST start|stop|pause|resume|snapshot|settings|kick|message`, `GET games`, `GET games/:id`, `GET games/:id/<fichier>`, `GET failed-logins`. Cookie `agar-ancienne_admin`, `httpOnly`, `SameSite=Strict`.
 
 ## Déploiement
 
-`docker compose up -d --build` : image `node:24-alpine`, port 3002 → 3000, volume `./parties` (exports) et volume nommé `n4agar-data` (SQLite). Toute la configuration passe par l'environnement (`.env.example`).
+`docker compose up -d --build` : image `node:24-alpine`, port 3002 → 3000, volume `./parties` (exports) et volume nommé `agar-ancienne-data` (SQLite). Toute la configuration passe par l'environnement (`.env.example`).
