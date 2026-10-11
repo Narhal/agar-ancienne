@@ -1,0 +1,6 @@
+node_modules/
+parties/*
+!parties/.gitkeep
+data/
+.env
+*.log

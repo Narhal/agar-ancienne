@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>N4Agar — Console admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * { box-sizing: border-box; font-family: "Segoe UI", system-ui, sans-serif; }
+        body { margin: 0; background: #0f1419; color: #eee; }
+        header { display: flex; justify-content: space-between; align-items: center; padding: 16px 24px; border-bottom: 1px solid #2a3139; }
+        h1 { margin: 0; font-size: 22px; color: #2ecc71; letter-spacing: 2px; }
+        main { padding: 16px 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        section { background: #171d24; border-radius: 8px; padding: 16px; }
+        section.wide { grid-column: 1 / -1; }
+        h2 { margin: 0 0 12px; font-size: 16px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        label { display: block; margin: 6px 0; font-size: 14px; }
+        input, select { padding: 6px 8px; border-radius: 4px; border: 1px solid #3a434d; background: #0f1419; color: #eee; width: 100%; }
+        .inline { display: flex; gap: 8px; align-items: end; flex-wrap: wrap; }
+        .inline label { flex: 1; min-width: 120px; }
+        button { padding: 8px 14px; border: 0; border-radius: 5px; background: #2ecc71; color: #fff; cursor: pointer; font-weight: 600; }
+        button.warn { background: #e67e22; }
+        button.danger { background: #e74c3c; }
+        button.ghost { background: #2a3139; }
+        button:disabled { opacity: 0.4; cursor: default; }
+        .actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+        table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid #2a3139; }
+        th { opacity: 0.6; font-size: 12px; text-transform: uppercase; }
+        td.num { text-align: right; font-variant-numeric: tabular-nums; }
+        .big { font-size: 40px; font-weight: 800; font-variant-numeric: tabular-nums; }
+        .state { font-size: 14px; text-transform: uppercase; letter-spacing: 2px; opacity: 0.8; }
+        #login { max-width: 360px; margin: 80px auto; }
+        #msg { min-height: 20px; color: #ffd166; font-size: 14px; margin-top: 8px; }
+        .hidden { display: none !important; }
+        .tag { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: 11px; background: #2a3139; margin-left: 4px; }
+        .tag.off { background: #7f2a2a; }
+        .tag.adm { background: #1e8f50; }
+        .links a { color: #7fd8a5; margin-right: 10px; font-size: 13px; }
+        @media (max-width: 900px) { main { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>N4AGAR · CONSOLE</h1>
+        <div>
+            <a href="/classement" target="_blank" style="color:#7fd8a5;margin-right:16px">Écran classement</a>
+            <button id="logout" class="ghost hidden">Déconnexion</button>
+        </div>
+    </header>
+
+    <section id="login">
+        <h2>Connexion</h2>
+        <label>Mot de passe admin<input id="password" type="password" autocomplete="current-password"></label>
+        <button id="login-btn">Se connecter</button>
+        <div id="msg"></div>
+    </section>
+
+    <main id="console" class="hidden">
+        <section>
+            <h2>Partie</h2>
+            <div class="state" id="state">—</div>
+            <div class="big" id="time">--:--</div>
+            <div id="snap" style="opacity:.7;font-size:13px"></div>
+            <div class="inline" style="margin-top:12px">
+                <label>Durée (min)<input id="minutes" type="number" min="0.5" step="0.5"></label>
+                <label>Snapshot (s)<input id="snapshotSec" type="number" min="5" step="5"></label>
+            </div>
+            <div class="actions">
+                <button id="start">Lancer la partie</button>
+                <button id="pause" class="warn">Pause</button>
+                <button id="resume">Reprendre</button>
+                <button id="snapshot" class="ghost">Snapshot maintenant</button>
+                <button id="stop" class="danger">Terminer</button>
+            </div>
+            <div class="inline" style="margin-top:12px">
+                <label>Message à tous<input id="message" type="text" maxlength="200" placeholder="Annonce"></label>
+                <button id="send" class="ghost">Envoyer</button>
+            </div>
+            <div id="console-msg" style="color:#ffd166;font-size:13px;min-height:18px;margin-top:6px"></div>
+        </section>
+
+        <section>
+            <h2>Score</h2>
+            <label>Formule de fusion des snapshots
+                <select id="formula">
+                    <option value="rangs">Points par rang (régularité)</option>
+                    <option value="somme">Somme des masses</option>
+                    <option value="moyenne">Moyenne des masses</option>
+                </select>
+            </label>
+            <div class="inline">
+                <label>Poids snapshots<input id="snapshotWeight" type="number" min="0" step="0.1"></label>
+                <label>Poids masse finale<input id="finalMassWeight" type="number" min="0" step="0.1"></label>
+                <label>Points par kill<input id="killValue" type="number" min="0" step="1"></label>
+            </div>
+            <label>Points par rang (1er, 2e, …)<input id="rankPoints" type="text"></label>
+            <div class="actions"><button id="save-settings" class="ghost">Enregistrer les réglages</button></div>
+            <p style="font-size:12px;opacity:.6">Score = poids snapshots × score snapshots + poids masse × masse finale + points par kill × kills. Un joueur mort au moment d'un snapshot compte 0. Les réglages s'appliquent aussi à la partie en cours.</p>
+        </section>
+
+        <section class="wide">
+            <h2>Joueurs connectés <span id="player-count"></span></h2>
+            <table id="players"><thead><tr><th>Pseudo</th><th>IP</th><th class="num">Masse</th><th class="num">Kills</th><th>État</th><th></th></tr></thead><tbody></tbody></table>
+        </section>
+
+        <section class="wide">
+            <h2>Classement en direct</h2>
+            <table id="live"><thead><tr><th>#</th><th>Joueur</th><th class="num">Masse</th><th class="num">Kills</th><th class="num">Score</th></tr></thead><tbody></tbody></table>
+        </section>
+
+        <section class="wide">
+            <h2>Historique des parties</h2>
+            <table id="games"><thead><tr><th>Partie</th><th>Début</th><th>Durée</th><th class="num">Joueurs</th><th>Vainqueur</th><th>Formule</th><th>Exports</th></tr></thead><tbody></tbody></table>
+        </section>
+
+        <section class="wide">
+            <h2>Tentatives de connexion admin échouées</h2>
+            <table id="failed"><thead><tr><th>Date</th><th>Pseudo</th><th>IP</th><th>Via</th></tr></thead><tbody></tbody></table>
+        </section>
+    </main>
+    <script type="module" src="js/admin.js"></script>
+</body>
+</html>

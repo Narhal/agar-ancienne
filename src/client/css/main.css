@@ -1,0 +1,346 @@
+* {
+    font-family: "Segoe UI", system-ui, sans-serif;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+html, body {
+    background-color: #222;
+    overflow: hidden;
+}
+
+html, body, canvas {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+div {
+    user-select: none;
+}
+
+.hidden { display: none !important; }
+
+/* ----- HUD ----- */
+
+.hud {
+    position: absolute;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.45);
+    color: #FFF;
+    border-radius: 6px;
+    pointer-events: none;
+}
+
+#hud-top {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    pointer-events: none;
+}
+
+#clock {
+    position: relative;
+    text-align: center;
+    min-width: 180px;
+}
+
+#clock-state {
+    display: block;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    opacity: 0.8;
+}
+
+#clock-time {
+    display: block;
+    font-size: 30px;
+    font-weight: bold;
+    font-variant-numeric: tabular-nums;
+}
+
+#clock-time.urgent { color: #ff6b6b; }
+#clock.paused #clock-time { color: #ffd166; }
+
+#clock-snap {
+    display: block;
+    font-size: 11px;
+    opacity: 0.7;
+}
+
+#status {
+    top: 10px;
+    right: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    min-width: 160px;
+}
+
+#status .title { font-size: 22px; }
+#status .me { color: #FF8888; }
+#status .hint { display: block; font-size: 11px; opacity: 0.7; font-weight: normal; margin-top: 6px; }
+
+#recall-hud {
+    bottom: 10px;
+    right: 120px;
+    width: 160px;
+    text-align: center;
+}
+
+#recall-hud kbd {
+    background: #444;
+    border-radius: 3px;
+    padding: 1px 5px;
+    font-size: 12px;
+}
+
+#recall-bar {
+    margin-top: 6px;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+#recall-fill {
+    height: 100%;
+    width: 100%;
+    background: #2ecc71;
+    transition: width 0.2s linear;
+}
+
+#recall-hud.cooling #recall-fill { background: #e67e22; }
+#recall-hud.active #recall-fill { background: #3498db; }
+
+/* ----- Classement complet ----- */
+
+#board-panel {
+    position: absolute;
+    top: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(520px, 95vw);
+    max-height: 80vh;
+    overflow: auto;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    border-radius: 8px;
+    padding: 12px;
+    pointer-events: none;
+}
+
+.board-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+.board-head .title { font-size: 20px; font-weight: bold; }
+#board-meta { font-size: 12px; opacity: 0.7; }
+
+#board-table, #end-table { width: 100%; border-collapse: collapse; }
+#board-table th, #end-table th { text-align: left; font-size: 12px; opacity: 0.7; padding: 4px 6px; border-bottom: 1px solid rgba(255,255,255,0.2); }
+#board-table td, #end-table td { padding: 4px 6px; border-bottom: 1px solid rgba(255,255,255,0.08); font-variant-numeric: tabular-nums; }
+#board-table tr.me td, #end-table tr.me td { color: #FF8888; font-weight: bold; }
+#board-table tr.dead td { opacity: 0.5; }
+#board-table td.num, #end-table td.num { text-align: right; }
+
+/* ----- Fin de partie ----- */
+
+#end-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+}
+
+.end-box {
+    background: #1b1b1b;
+    color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    width: min(760px, 95vw);
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.end-box h2 { margin: 0 0 6px; font-size: 28px; }
+#end-meta { margin: 0 0 10px; opacity: 0.8; }
+.end-scroll { overflow: auto; flex: 1; min-height: 0; }
+.end-hint { font-size: 12px; opacity: 0.7; }
+#end-table tr:first-child td { color: #ffd166; font-weight: bold; }
+#end-close { align-self: flex-end; padding: 8px 16px; border: 0; border-radius: 5px; background: #2ecc71; color: #fff; cursor: pointer; }
+
+#toast {
+    position: absolute;
+    top: 110px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(46, 204, 113, 0.9);
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: bold;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* ----- Boutons tactiles ----- */
+
+#split, #feed, #recall-btn {
+    position: absolute;
+    bottom: 10px;
+    width: 100px;
+    height: 100px;
+    padding: 5px;
+    border: none;
+}
+
+#split { left: 10px; }
+#feed { right: 10px; }
+#recall-btn {
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background: rgba(52, 152, 219, 0.8);
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* ----- Chat ----- */
+
+.chatbox {
+    position: absolute;
+    width: 320px;
+    height: 320px;
+    background: rgba(22, 22, 22, 0.7);
+    bottom: 5px;
+    left: 5px;
+    border-radius: 5px;
+    pointer-events: none;
+}
+
+.chatbox .chat-list {
+    padding: 5px;
+    margin: 0;
+    list-style: none;
+    height: 285px;
+    overflow: hidden;
+}
+
+.chatbox .chat-list li { padding: 2px; margin: 3px; color: #eee; }
+.chatbox .chat-list li.me b { color: #ea6153; }
+.chatbox .chat-list li.friend b { color: #2ecc71; }
+.chatbox .chat-list li.system { color: #c39bd3; font-style: italic; }
+.chatbox .chat-list li.system:before { content: "» "; }
+
+.chatbox .chat-input {
+    pointer-events: all;
+    width: 100%;
+    padding: 8px;
+    background: transparent;
+    color: #fff;
+    border: none;
+    border-top: 1px solid #555;
+    outline: none;
+}
+
+/* ----- Menu ----- */
+
+#startMenuWrapper {
+    z-index: 2;
+    position: relative;
+    max-height: 100vh;
+    overflow: auto;
+    transition: max-height 0.6s;
+}
+
+#startMenu {
+    position: relative;
+    margin: 60px auto;
+    width: 380px;
+    max-width: 95vw;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: white;
+}
+
+#startMenu .logo {
+    padding: 0;
+    margin: 0 0 12px;
+    text-align: center;
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #2ecc71;
+}
+
+#playerNameInput {
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    border: solid 1px #dcdcdc;
+    transition: box-shadow 0.3s, border 0.3s;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    outline: none;
+}
+
+#playerNameInput:focus { border: solid 1px #CCCCCC; box-shadow: 0 0 3px 1px #DDDDDD; }
+
+.menu-btn {
+    position: relative;
+    margin: 10px auto 0;
+    width: 100%;
+    height: 40px;
+    font-size: large;
+    color: white;
+    text-align: center;
+    background: #2ecc71;
+    border: 0;
+    border-bottom: 2px solid #28be68;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.menu-btn:hover, .menu-btn:active, .menu-btn.focus { background: #55D88B; outline: none; }
+.menu-btn.focus { box-shadow: 0 0 0 3px #1e8f50; }
+
+.gamepad-hint { margin-top: 10px; font-size: 12px; color: #777; text-align: center; }
+.gamepad-hint.on { color: #1e8f50; font-weight: bold; }
+
+#settings { max-height: 0; overflow: hidden; transition: max-height 0.6s; }
+#settings.open { max-height: 900px; }
+
+#startMenu h3 { margin: 12px 0 0; }
+#startMenu ul { margin: 6px 0 0; padding: 0 10px; list-style: none; }
+#startMenu ul label { display: block; margin: 4px 0; }
+#keybinds li { display: flex; justify-content: space-between; align-items: center; margin: 4px 0; }
+.keybtn { min-width: 110px; padding: 4px 8px; border: 1px solid #bbb; border-radius: 4px; background: #f5f5f5; cursor: pointer; font-family: monospace; }
+.keybtn.listening { background: #ffd166; }
+.small { padding: 4px 8px; border: 1px solid #bbb; border-radius: 4px; background: #fff; cursor: pointer; }
+.pad-help li { font-size: 12px; color: #555; }
+#startMenu .input-error { color: red; opacity: 0; font-size: 12px; display: block; text-align: center; min-height: 14px; }
+
+#gameAreaWrapper {
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+
+@media only screen and (min-width: 1224px) {
+    #mobile { display: none; }
+}
+
+@media only screen and (max-width: 1224px) {
+    #chatbox { display: none; }
+    #recall-hud { display: none; }
+}
+
+input[type="image"]:focus, *:focus { outline: 1px solid transparent; }

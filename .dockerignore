@@ -1,0 +1,7 @@
+node_modules
+parties
+data
+vault
+.git
+.env
+*.md
